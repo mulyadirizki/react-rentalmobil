@@ -1,19 +1,20 @@
-import react, { Component } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
-import { Actions } from 'react-native-router-flux'
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-class Login extends Component {
-    state = {
-        email: '',
-        password: ''
+export default function LoginScreen({navigation}) {
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+
+    saveToken =  async(value) => {
+        try{
+            await AsyncStorage.setItem('@tokenLogin', value)
+        }catch(err) {
+            console.log(err)
+        }
     }
-    handleEmail = (text) => {
-        this.setState({ email: text })
-    }
-    handlePassword = (text) => {
-        this.setState({ password: text })
-    }
-    login = (email, pass) => {
+
+    login = async() => {
         fetch('http://192.168.125.16:8000/api/login', {
             method: 'POST',
             headers: {
@@ -22,87 +23,87 @@ class Login extends Component {
             },
             body: JSON.stringify({
                 'email': email,
-                'password': pass
+                'password': password
             })
         }).then((response) => response.json())
         .then((response) => {
             if(response.success === false) {
                 alert(response.message);
             } else if(response.success === true) {
-                alert(response.message);
-                Actions.home();
+                alert(response.message)
+                this.saveToken(response.token);
+                navigation.replace('Home')
             } else {
                 alert('Connection failed');
             }
         })
         .catch((error)=>{
             console.log("Api call error");
-            Alert.alert(error.message);
+            alert(error.message);
         });
     }
-    render() {
-        const goToRegister = () => {
-            Actions.register()
-        }
-        return (
-            <View style = {styles.container}>
-                <Text style = {styles.login}>Login</Text>
-
+    return(
+        <View style = {styles.container}>
+            <Text style = {styles.loginText}>Login</Text>
+            <View style = {styles.wrapperInput}>
                 <TextInput style = {styles.input}
                     underlineColorAndroid = "transparent"
                     placeholder = "Email"
                     placeholderTextColor = "#9a73ef"
                     autoCapitalize = "none"
-                    onChangeText = {this.handleEmail}/>
+                    value={email}
+                    onChangeText={(value) => setEmail(value)}
+                />
 
                 <TextInput style = {styles.input}
                     underlineColorAndroid = "transparent"
                     placeholder = "Password"
                     placeholderTextColor = "#9a73ef"
                     autoCapitalize = "none"
-                    onChangeText = {this.handlePassword}/>
+                    value={password}
+                    onChangeText={(value) => setPassword(value)}
+                />
 
                 <TouchableOpacity
                     style = {styles.submitButton}
                     onPress = {
-                        () => this.login(this.state.email, this.state.password)
+                        () => this.login()
                     }>
                     <Text style = {styles.submitButtonText}> Login </Text>
                 </TouchableOpacity>
-
-                <TouchableOpacity onPress = {goToRegister}>
+                <TouchableOpacity style={{marginLeft: 20}} onPress={() => navigation.navigate('Register')}>
                     <Text>Belum punya akun ? Daftar</Text>
                 </TouchableOpacity>
             </View>
-        )
-    }
+        </View>
+    )
 }
-
-export default Login
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems:'center',
-        justifyContent :'center'
+        justifyContent: 'center',
+        alignItems: 'center'
     },
-    login: {
-        textAlign: 'center',
-        fontSize: 20
+    loginText: {
+        fontSize: 24,
+        fontWeight: 700
     },
     input: {
         margin: 15,
         height: 40,
-        width: 250,
+        width: 300,
         borderColor: '#7a42f4',
-        borderWidth: 1
+        borderWidth: 1,
+        borderRadius: 20
     },
     submitButton: {
         backgroundColor: '#7a42f4',
         padding: 10,
         margin: 15,
-        width: 250,
+        width: 300,
         height: 40,
+        borderRadius: 20
     },
     submitButtonText:{
         color: 'white',
