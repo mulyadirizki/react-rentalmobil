@@ -64,7 +64,7 @@ export default function LoginScreen({navigation}) {
             if(response.success === false) {
                 alert(response.message);
             } else if(response.success === true) {
-                alert(response.message);
+                alert('Registrasi berhasil, silahkan login');
                 Actions.login();
             } else {
                 alert('Connection failed');
@@ -96,14 +96,14 @@ export default function LoginScreen({navigation}) {
 
                 <TextInput style = {styles.input}
                     underlineColorAndroid = "transparent"
-                    placeholder = "Tgl Lahir"
+                    placeholder = "2000-01-01"
                     placeholderTextColor = "#9a73ef"
                     autoCapitalize = "none"
                     onChangeText = {this.handleTglLahir}/>
 
                 <TextInput style = {styles.input}
                     underlineColorAndroid = "transparent"
-                    placeholder = "Jenis Kelamin"
+                    placeholder = "1. Laki -Laki, 2.Perempuan"
                     placeholderTextColor = "#9a73ef"
                     autoCapitalize = "none"
                     onChangeText = {this.handleJkel}/>

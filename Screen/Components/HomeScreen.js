@@ -101,7 +101,7 @@ export default function HomeScreen ({navigation}) {
                   data && data.map((item, i) => {
                      return (
                         <>
-                        <View key={i} style={styles.item}>
+                        <View key={item.i} style={styles.items}>
                            <Card containerStyle={{}} wrapperStyle={{}}>
                               <Card.Title>{ item.merk_mobil } { item.nama_mobil }</Card.Title>
                               <Card.Divider />
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
       alignItems: 'flex-start',
       marginBottom: 20
    },
-   item: {
+   items: {
       width: '50%' // is 50% of container width
    },
    cardMobil: {
