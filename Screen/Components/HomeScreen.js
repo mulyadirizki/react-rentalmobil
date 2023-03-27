@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, ScrollView, View, Image } from 'react-native';
-import { Button, ThemeProvider, Text, Card, Icon, SearchBar  } from '@rneui/themed';
+import { Button, Text, Card, Icon, Header } from '@rneui/themed';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function HomeScreen ({navigation}) {
@@ -34,13 +34,33 @@ export default function HomeScreen ({navigation}) {
    return (
       <ScrollView>
          <View style = {styles.container}>
-            <ThemeProvider>
-               <SearchBar style={{borderRadius: 20}}
-                  placeholder="Type Here..."
-                  onChangeText={updateSearch}
-                  value={search}
+            <Header style={{backgroundColor: 'red'}}>
+               <Icon
+                  reverse
+                  name='car'
+                  type='ionicon'
+                  color='#00aced'
+                  onPress={() => navigation.navigate('Mobil')}
                />
-            </ThemeProvider>
+               <Icon
+                  reverse
+                  name='cart'
+                  type='ionicon'
+                  color='#00aced'
+                  onPress={() => navigation.navigate('ListRental')}
+               />
+               <Button onPress={() => navigation.navigate('Login')}
+                     buttonStyle={{
+                     borderRadius: 20,
+                     backgroundColor: 'black',
+                     marginTop: 20,
+                     marginLeft: 0,
+                     marginRight: 0,
+                     marginBottom: 0,
+                  }}
+                  title="Logout"
+               />
+            </Header>
 
             <Card>
                <Card.Title>Mobil Toyota</Card.Title>

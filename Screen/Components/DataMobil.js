@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, ScrollView, View, TextInput, Image } from 'react-native';
-import { Button, ThemeProvider, Text, Card, Icon, PricingCard } from '@rneui/themed';
+import { StyleSheet, ScrollView, View, Image } from 'react-native';
+import { Button, Header, Text, Card, Icon } from '@rneui/themed';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function HomeScreen ({navigation}) {
@@ -8,7 +8,7 @@ export default function HomeScreen ({navigation}) {
    useEffect(() => {
       const fectData = async () => {
          const token_key = await AsyncStorage.getItem('@tokenLogin');
-         fetch('http://192.168.125.16:8000/api/mobil',{
+         fetch('http://192.168.130.16:8000/api/mobil',{
             method: 'GET',
             headers: {
                'Authorization': 'Bearer '+token_key
@@ -29,9 +29,33 @@ export default function HomeScreen ({navigation}) {
    return (
       <ScrollView>
          <View style = {styles.container}>
-            <ThemeProvider>
-               <Button title="Rental Mobil" />
-            </ThemeProvider>
+         <Header style={{backgroundColor: 'red'}}>
+               <Icon
+                  reverse
+                  name='car'
+                  type='ionicon'
+                  color='#00aced'
+                  onPress={() => navigation.navigate('Mobil')}
+               />
+               <Icon
+                  reverse
+                  name='cart'
+                  type='ionicon'
+                  color='#00aced'
+                  onPress={() => navigation.navigate('ListRental')}
+               />
+               <Button onPress={() => navigation.navigate('Login')}
+                     buttonStyle={{
+                     borderRadius: 20,
+                     backgroundColor: 'black',
+                     marginTop: 20,
+                     marginLeft: 0,
+                     marginRight: 0,
+                     marginBottom: 0,
+                  }}
+                  title="Logout"
+               />
+            </Header>
 
             <Text style = {styles.title}>Mobil Terbaru</Text>
             <View style={styles.grid}>
