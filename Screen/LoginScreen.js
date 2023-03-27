@@ -15,7 +15,7 @@ export default function LoginScreen({navigation}) {
     }
 
     login = async() => {
-        fetch('http://192.168.125.16:8000/api/login', {
+        fetch('http://192.168.130.16:8000/api/login', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

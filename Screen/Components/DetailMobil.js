@@ -36,8 +36,10 @@ export default function DetailMobil({route, navigation}) {
             if (response.success == true) {
                 if (cara_bayar === '1'){
                     alert('Confirmasi rental berhasil dilakukan, silahkan selesaikan pembayaran')
+                    navigation.navigate('ListRental')
                 } else if (cara_bayar === '2') {
                     alert('Confirmasi rental berhasil dilakukan, silahkan melakukan pembayaran saat mengambil mobil')
+                    navigation.navigate('ListRental')
                 } else {
                     alert(response.message)
                 }

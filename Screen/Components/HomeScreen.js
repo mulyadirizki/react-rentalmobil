@@ -8,7 +8,7 @@ export default function HomeScreen ({navigation}) {
    useEffect(() => {
       const fectData = async () => {
          const token_key = await AsyncStorage.getItem('@tokenLogin');
-         fetch('http://192.168.125.16:8000/api/mobil',{
+         fetch('http://192.168.130.16:8000/api/mobil',{
             method: 'GET',
             headers: {
                'Authorization': 'Bearer '+token_key

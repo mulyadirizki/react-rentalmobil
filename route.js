@@ -8,6 +8,7 @@ import RegisterScreen from './Screen/RegisterScreen'
 import HomeScreen from './Screen/Components/HomeScreen'
 import DetailMobil from './Screen/Components/DetailMobil'
 import DataMobil from './Screen/Components/DataMobil'
+import ListRental from './Screen/Components/ListRental'
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ function Navigation() {
             <Stack.Screen name="Register" component={RegisterScreen} />
             <Stack.Screen name="Detail" component={DetailMobil} />
             <Stack.Screen name="Mobil" component={DataMobil} />
+            <Stack.Screen name="ListRental" component={ListRental} />
         </Stack.Navigator>
     </NavigationContainer>
   );
