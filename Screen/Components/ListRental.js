@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, ScrollView, View } from 'react-native';
-import { ThemeProvider, Text, SearchBar, ListItem, Avatar  } from '@rneui/themed';
+import { Header, Text, ListItem, Avatar  } from '@rneui/themed';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function HomeScreen ({navigation}) {
@@ -34,13 +34,33 @@ export default function HomeScreen ({navigation}) {
    return (
       <ScrollView>
          <View style = {styles.container}>
-            <ThemeProvider>
-               <SearchBar style={{borderRadius: 20}}
-                  placeholder="Type Here..."
-                  onChangeText={updateSearch}
-                  value={search}
+            <Header style={{backgroundColor: 'red'}}>
+               <Icon
+                  reverse
+                  name='car'
+                  type='ionicon'
+                  color='#00aced'
+                  onPress={() => navigation.navigate('Mobil')}
                />
-            </ThemeProvider>
+               <Icon
+                  reverse
+                  name='cart'
+                  type='ionicon'
+                  color='#00aced'
+                  onPress={() => navigation.navigate('ListRental')}
+               />
+               <Button onPress={() => navigation.navigate('Login')}
+                     buttonStyle={{
+                     borderRadius: 20,
+                     backgroundColor: 'black',
+                     marginTop: 20,
+                     marginLeft: 0,
+                     marginRight: 0,
+                     marginBottom: 0,
+                  }}
+                  title="Logout"
+               />
+            </Header>
             <Text style = {styles.title}>Data Rental Saya</Text>
             
             {

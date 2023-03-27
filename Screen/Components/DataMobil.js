@@ -29,7 +29,7 @@ export default function HomeScreen ({navigation}) {
    return (
       <ScrollView>
          <View style = {styles.container}>
-         <Header style={{backgroundColor: 'red'}}>
+            <Header style={{backgroundColor: 'red'}}>
                <Icon
                   reverse
                   name='car'
