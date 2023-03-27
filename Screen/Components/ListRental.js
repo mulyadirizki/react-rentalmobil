@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, ScrollView, View } from 'react-native';
-import { Header, Text, ListItem, Avatar  } from '@rneui/themed';
+import { Header, Text, ListItem, Avatar, Icon  } from '@rneui/themed';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function HomeScreen ({navigation}) {
@@ -62,7 +62,7 @@ export default function HomeScreen ({navigation}) {
                />
             </Header>
             <Text style = {styles.title}>Data Rental Saya</Text>
-            
+
             {
                 data && data.map((item, i) => {
                     return (
